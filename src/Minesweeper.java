@@ -38,12 +38,16 @@ public class Minesweeper {
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList;
 
-    int tileClicked = 0; // goal is to click all the times excluding the bomb tiles
+    int tileClicked = 0; // goal is to click all the tiles excluding the bomb tiles
 
     boolean gameOver = false;
 
-    Minesweeper(){
-        //frame.setVisible(true);
+    //Minesweeper(){
+    //    
+    //}
+
+   void startGame(){
+    //frame.setVisible(true);
         frame.setSize(boardWidth, boardHight);
         frame.setLocationRelativeTo(null); // <- this will make the gui open in the center of the screen
         frame.setResizable(false);
@@ -111,7 +115,7 @@ public class Minesweeper {
         frame.setVisible(true); // makes the frame visible after everything is loaded
 
         setMines();
-    }
+   } 
 
     void setMines(){
         mineList = new ArrayList<MineTile>();
