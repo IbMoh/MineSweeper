@@ -3,20 +3,9 @@ import java.awt.event.*;
 import java.util.ArrayList; // <- store all the tiles with the mines
 import java.util.Random; // <- place mines in random tiles
 import javax.swing.*;
+import assets.*;
 
 public class Minesweeper {
-
-    private class MineTile extends JButton{
-
-        int roww;
-        int coloumnn;
-
-        MineTile(int rowConst, int coloumnConst){
-            this.roww = rowConst;
-            this.coloumnn = coloumnConst;
-        }
-
-    }
 
     int tileSize = 70;
     int numRows = 8;
@@ -41,10 +30,6 @@ public class Minesweeper {
     int tileClicked = 0; // goal is to click all the tiles excluding the bomb tiles
 
     boolean gameOver = false;
-
-    //Minesweeper(){
-    //    
-    //}
 
    void startGame(){
     //frame.setVisible(true);
