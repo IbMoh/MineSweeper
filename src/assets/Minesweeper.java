@@ -7,29 +7,24 @@ import javax.swing.*;
 
 public class Minesweeper {
 
+    // changeable variables
     int tileSize = 70;
     int numRows = 8;
+    int mineCount = 10;
+    int tileClicked = 0; // goal is to click all the tiles excluding the bomb tiles
+    boolean gameOver = false;
+
     int numColoums = numRows;
     int boardWidth = numColoums * tileSize;
     int boardHight = numRows * tileSize;
     
     JFrame frame = new JFrame("Minesweeper");
-
-    int mineCount = 10;
-
-    Random random = new Random();
-
     JLabel textLabel = new JLabel();
     JPanel texPanel = new JPanel();
-
     JPanel boardPanel = new JPanel();
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
-
-    int tileClicked = 0; // goal is to click all the tiles excluding the bomb tiles
-
-    boolean gameOver = false;
     SetUp bombSetUp = new SetUp(this);
 
    public void startGame(){
