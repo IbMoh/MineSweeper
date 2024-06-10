@@ -2,7 +2,6 @@ package assets;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList; // <- store all the tiles with the mines
-import java.util.Random; // <- place mines in random tiles
 import javax.swing.*;
 
 public class Minesweeper {
