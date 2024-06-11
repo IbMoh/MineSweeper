@@ -25,6 +25,9 @@ public class Minesweeper {
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
     SetUp bombSetUp = new SetUp(this);
+    Mainmenu mainmenu = new Mainmenu(this);
+
+    // could also be that we make a constructor here and take that instance into mainmenu
 
    public void startGame(){
     //frame.setVisible(true);
