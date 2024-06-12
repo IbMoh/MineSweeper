@@ -28,9 +28,8 @@ public class Minesweeper {
 
     // could also be that we make a constructor here and take that instance into mainmenu
 
-    /*public Minesweeper(int tileSize, int numRows, int numColoums, int mineCount){
+    /*public Minesweeper(int tileSize, int numRows, int mineCount){
         this.tileSize = tileSize;
-        this.numColoums = numColoums;
         this.numRows = numRows;
         this.mineCount = mineCount;
     }*/
