@@ -2,9 +2,12 @@ package assets;
 import javax.swing.*;
 
 public class Mainmenu extends JButton {
-    Minesweeper game;
 
-    public Mainmenu(Minesweeper game){
-        this.game = game;
-    }
+    /*int mineCount;
+    int numRows;
+    int numColoums;
+    int tileSize;
+    
+    Minesweeper game = new Minesweeper(tileSize, numRows, numColoums, mineCount);
+    */
 }
