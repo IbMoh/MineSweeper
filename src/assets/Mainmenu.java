@@ -70,9 +70,9 @@ public class Mainmenu extends JButton {
         menuPanel.setSize(700,200);
         menuPanel.setBackground(new Color(255, 255, 255));
         menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        menuPanel.add(play, "align center");
-        menuPanel.add(leaderBoards, "align center");
-        menuPanel.add(rules, "align center");
+        menuPanel.add(play);
+        menuPanel.add(leaderBoards);
+        menuPanel.add(rules);
 
     }
 
