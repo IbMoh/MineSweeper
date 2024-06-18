@@ -90,6 +90,10 @@ public class Mainmenu extends JButton {
     }
 
     private void buttonEffects(JButton button){
+
+        button.setFont(new Font("Arial", Font.BOLD, 15));
+        button.setFocusPainted(false);
+
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
                 button.setBackground(new Color(220, 220, 220));
