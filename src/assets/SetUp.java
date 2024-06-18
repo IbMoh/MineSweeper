@@ -35,7 +35,7 @@ public class SetUp extends JButton {
         }
 
         game.gameOver = true;
-        game.textLabel.setText("Game Over!");
+        game.mines.setText("Game Over!");
     }
 
     public int countMine(int ro, int col){
@@ -43,7 +43,8 @@ public class SetUp extends JButton {
             return 0;
 
         }
-        if (game.mineList.contains(game.board[ro][col])){ // <- if this tile is in the mineList return 1 // contained a mine
+        if (game.mineList.contains(game.board[ro][col])){ // <- if this tile is in the mineList return 1
+            // contained a mine
             return 1;
         }
         return 0; // didnt contain a mine
@@ -105,7 +106,7 @@ public class SetUp extends JButton {
             
             game.gameOver = true;
 
-            game.textLabel.setText("Mines Cleared!");
+            game.mines.setText("Mines Cleared!");
         }
 
     }

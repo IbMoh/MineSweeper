@@ -18,7 +18,7 @@ public class Minesweeper {
     int boardHight = numRows * tileSize;
     
     JFrame frame = new JFrame("Minesweeper");
-    JLabel textLabel = new JLabel();
+    JLabel mines = new JLabel();
     JPanel texPanel = new JPanel();
     JPanel boardPanel = new JPanel();
 
@@ -39,17 +39,16 @@ public class Minesweeper {
         frame.setSize(boardWidth, boardHight);
         frame.setLocationRelativeTo(null); // <- this will make the gui open in the center of the screen
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         //frame.setUndecorated(true);
 
-        textLabel.setFont(new Font("Arial", Font.BOLD, 25));
-        textLabel.setHorizontalAlignment(JLabel.CENTER);
-        textLabel.setText("Minesweeper: " + Integer.toString(mineCount));
-        textLabel.setOpaque(true);
+        mines.setFont(new Font("Arial", Font.BOLD, 25));
+        mines.setHorizontalAlignment(JLabel.CENTER);
+        mines.setText("Mines: " + Integer.toString(mineCount));
+        mines.setOpaque(true);
 
         texPanel.setLayout(new BorderLayout());
-        texPanel.add(textLabel);
+        texPanel.add(mines);
 
         frame.add(texPanel, BorderLayout.NORTH);
 
