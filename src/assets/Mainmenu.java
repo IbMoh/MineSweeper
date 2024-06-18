@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Mainmenu extends JButton {
+public class Mainmenu {
 
     Minesweeper game = new Minesweeper();
 

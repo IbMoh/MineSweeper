@@ -1,8 +1,7 @@
 package assets;
 import java.util.Random; // <- place mines in random tiles
-import javax.swing.*;
 
-public class SetUp extends JButton {
+public class SetUp{
 
     private Minesweeper game;
     Random random = new Random();
