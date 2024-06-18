@@ -52,15 +52,15 @@ public class Mainmenu {
     private void createButtons(){
 
         play.setPreferredSize(new Dimension(200, 40));
-        play.setBackground(new Color(244, 244, 244));
+        play.setBackground(new Color(238, 238, 238));
         buttonEffects(play);
 
         leaderBoards.setPreferredSize(new Dimension(200, 40));
-        leaderBoards.setBackground(new Color(244, 244, 244));
+        leaderBoards.setBackground(new Color(238, 238, 238));
         buttonEffects(leaderBoards);
 
         rules.setPreferredSize(new Dimension(200, 40));
-        rules.setBackground(new Color(244, 244, 244));
+        rules.setBackground(new Color(238, 238, 238));
         buttonEffects(rules);
 
     }
@@ -93,13 +93,15 @@ public class Mainmenu {
 
         button.setFont(new Font("Arial", Font.BOLD, 15));
         button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
-                button.setBackground(new Color(220, 220, 220));
+                button.setBackground(new Color(215, 215, 215));
             }
             public void mouseExited(MouseEvent e){
-                button.setBackground(new Color(244, 244, 244));
+                button.setBackground(new Color(238, 238, 238));
             }
         });
     }
