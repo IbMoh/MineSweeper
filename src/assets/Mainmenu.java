@@ -12,6 +12,7 @@ public class Mainmenu {
 
     JFrame menuFrame = new JFrame("Minesweeper");
     JPanel menuPanel = new JPanel();
+    JLabel textLabel = new JLabel();
 
     JButton play = new JButton("Play");
     JButton leaderBoards = new JButton("Leader Boards");
@@ -70,6 +71,10 @@ public class Mainmenu {
         menuPanel.setSize(700,200);
         menuPanel.setBackground(new Color(255, 255, 255));
         menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        textLabel.setText("Minesweeper");
+        textLabel.setFont(new Font("Arial", Font.BOLD, 45));
+        
+        menuPanel.add(textLabel);
         menuPanel.add(play);
         menuPanel.add(leaderBoards);
         menuPanel.add(rules);

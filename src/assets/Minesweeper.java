@@ -18,13 +18,13 @@ public class Minesweeper {
     int boardHight = numRows * tileSize;
     
     JFrame frame = new JFrame("Minesweeper");
-    JLabel mines = new JLabel();
+    JLabel minesLabel = new JLabel();
     JPanel texPanel = new JPanel();
     JPanel boardPanel = new JPanel();
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
-    SetUp bombSetUp = new SetUp(this);
+    Engine bombSetUp = new Engine(this);
 
     // could also be that we make a constructor here and take that instance into mainmenu
 
@@ -42,13 +42,13 @@ public class Minesweeper {
         frame.setLayout(new BorderLayout());
         //frame.setUndecorated(true);
 
-        mines.setFont(new Font("Arial", Font.BOLD, 25));
-        mines.setHorizontalAlignment(JLabel.CENTER);
-        mines.setText("Mines: " + Integer.toString(mineCount));
-        mines.setOpaque(true);
+        minesLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        minesLabel.setHorizontalAlignment(JLabel.CENTER);
+        minesLabel.setText("Mines: " + Integer.toString(mineCount));
+        minesLabel.setOpaque(true);
 
         texPanel.setLayout(new BorderLayout());
-        texPanel.add(mines);
+        texPanel.add(minesLabel);
 
         frame.add(texPanel, BorderLayout.NORTH);
 

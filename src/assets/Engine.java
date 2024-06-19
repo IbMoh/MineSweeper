@@ -1,12 +1,12 @@
 package assets;
 import java.util.Random; // <- place mines in random tiles
 
-public class SetUp{
+public class Engine{
 
     private Minesweeper game;
     Random random = new Random();
 
-    public SetUp(Minesweeper game) {
+    public Engine(Minesweeper game) {
         this.game = game;
     }
 
@@ -34,7 +34,7 @@ public class SetUp{
         }
 
         game.gameOver = true;
-        game.mines.setText("Game Over!");
+        game.minesLabel.setText("Game Over!");
     }
 
     public int countMine(int ro, int col){
@@ -105,7 +105,7 @@ public class SetUp{
             
             game.gameOver = true;
 
-            game.mines.setText("Mines Cleared!");
+            game.minesLabel.setText("Mines Cleared!");
         }
 
     }
