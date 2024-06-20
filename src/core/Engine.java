@@ -1,4 +1,4 @@
-package assets;
+package core;
 import java.util.Random; // <- place mines in random tiles
 
 public class Engine{

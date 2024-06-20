@@ -1,4 +1,4 @@
-package assets;
+package core;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList; // <- store all the tiles with the mines

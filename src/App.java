@@ -1,4 +1,4 @@
-import assets.Mainmenu;
+import core.Mainmenu;
 
 public class App {
     public static void main(String[] args) throws Exception {
