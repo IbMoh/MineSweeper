@@ -1,5 +1,7 @@
 package core;
+import java.net.URL;
 import java.util.Random; // <- place mines in random tiles
+import javax.swing.ImageIcon;
 
 public class Engine{
 
@@ -28,9 +30,16 @@ public class Engine{
     }
 
     public void reavelMines(){
+        ImageIcon bombIcon = null;
+
+        URL bombPng = getClass().getResource("imgs/bomb.png");
+        if (bombPng != null) {
+            bombIcon = new ImageIcon(bombPng);
+        }
+
         for (int i = 0; i < game.mineList.size(); i++){
             MineTile tile = game.mineList.get(i);
-            tile.setText("💣");
+            tile.setIcon(bombIcon);
         }
 
         game.gameOver = true;
