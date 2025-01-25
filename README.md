@@ -1,1 +1,1 @@
-This is a minesweeper game.I have implemented a basic and fully functional Minesweeper game utilizing Java Swing for the GUI and will further continue to develop this game adding a database to save game history and a multiplayer gamemode
+This is a basic minesweeper game. I have implemented a basic and fully functional Minesweeper game utilizing Java Swing for the GUI and will further continue to develop this game adding a database to save game history and a multiplayer gamemode
