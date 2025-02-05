@@ -1,4 +1,4 @@
-package assets;
+package core;
 import javax.swing.JButton;
 
 public class MineTile extends JButton{

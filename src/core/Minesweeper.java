@@ -1,6 +1,7 @@
-package assets;
+package core;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.ArrayList; // <- store all the tiles with the mines
 import javax.swing.*;
 
@@ -18,35 +19,48 @@ public class Minesweeper {
     int boardHight = numRows * tileSize;
     
     JFrame frame = new JFrame("Minesweeper");
-    JLabel textLabel = new JLabel();
+    JLabel minesLabel = new JLabel();
     JPanel texPanel = new JPanel();
     JPanel boardPanel = new JPanel();
+    ImageIcon grassTile = null;
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
-    SetUp bombSetUp = new SetUp(this);
+    Engine bombSetUp = new Engine(this);
+
+    // could also be that we make a constructor here and take that instance into mainmenu
+
+    /*public Minesweeper(int tileSize, int numRows, int mineCount){
+        this.tileSize = tileSize;
+        this.numRows = numRows;
+        this.mineCount = mineCount;
+    }*/
 
    public void startGame(){
     //frame.setVisible(true);
         frame.setSize(boardWidth, boardHight);
         frame.setLocationRelativeTo(null); // <- this will make the gui open in the center of the screen
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        //frame.setUndecorated(true);
 
-        textLabel.setFont(new Font("Arial", Font.BOLD, 25));
-        textLabel.setHorizontalAlignment(JLabel.CENTER);
-        textLabel.setText("Minesweeper: " + Integer.toString(mineCount));
-        textLabel.setOpaque(true);
+        minesLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        minesLabel.setHorizontalAlignment(JLabel.CENTER);
+        minesLabel.setText("Mines: " + Integer.toString(mineCount));
+        minesLabel.setOpaque(true);
 
         texPanel.setLayout(new BorderLayout());
-        texPanel.add(textLabel);
+        texPanel.add(minesLabel);
 
         frame.add(texPanel, BorderLayout.NORTH);
 
         boardPanel.setLayout(new GridLayout(numRows, numColoums)); // 8x8
         frame.add(boardPanel);
         //boardPanel.setBackground(Color.LIGHT_GRAY);
+        URL grassTilePng = getClass().getResource("imgs/grassLandTile.png");
+        if (grassTilePng != null) {
+            grassTile = new ImageIcon(grassTilePng);
+        }
 
         for (int r = 0; r < numRows; r++){
             for (int c = 0; c < numColoums; c++){
@@ -56,6 +70,8 @@ public class Minesweeper {
                 tile.setFocusable(false);
                 tile.setMargin(new Insets(0, 0, 0, 0));
                 tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
+                tile.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                //tile.setIcon(grassTile);
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e){
@@ -72,15 +88,18 @@ public class Minesweeper {
                                     bombSetUp.reavelMines();;
                                 }
                                 else{
+                                    tile.setIcon(null);
                                     bombSetUp.checkMine(tile.roww, tile.coloumnn);
                                 }
                             }
                         }
                         else if (e.getButton() == MouseEvent.BUTTON3){ // right click
                             if (tile.getText() == "" && tile.isEnabled()){
+                                //tile.setIcon(null);
                                 tile.setText("🚩");
                             }
                             else if (tile.getText() == "🚩"){
+                               // tile.setIcon(grassTile);
                                 tile.setText("");
                             }
                         }

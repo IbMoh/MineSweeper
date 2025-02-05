@@ -1,13 +1,15 @@
-package assets;
+package core;
+import java.awt.*;
+import java.net.URL;
 import java.util.Random; // <- place mines in random tiles
-import javax.swing.*;
+import javax.swing.ImageIcon;
 
-public class SetUp extends JButton {
+public class Engine{
 
     private Minesweeper game;
     Random random = new Random();
 
-    public SetUp(Minesweeper game) {
+    public Engine(Minesweeper game) {
         this.game = game;
     }
 
@@ -29,13 +31,22 @@ public class SetUp extends JButton {
     }
 
     public void reavelMines(){
+        ImageIcon bombIcon = null;
+
+        URL bombPng = getClass().getResource("imgs/bomb.png");
+        if (bombPng != null) {
+            bombIcon = new ImageIcon(bombPng);
+        }
+
         for (int i = 0; i < game.mineList.size(); i++){
             MineTile tile = game.mineList.get(i);
-            tile.setText("💣");
+           // tile.setBackground(new Color(34,162,23));
+            tile.setIcon(bombIcon);
+            tile.setBackground(Color.GRAY);
         }
 
         game.gameOver = true;
-        game.textLabel.setText("Game Over!");
+        game.minesLabel.setText("Game Over!");
     }
 
     public int countMine(int ro, int col){
@@ -43,7 +54,8 @@ public class SetUp extends JButton {
             return 0;
 
         }
-        if (game.mineList.contains(game.board[ro][col])){ // <- if this tile is in the mineList return 1 // contained a mine
+        if (game.mineList.contains(game.board[ro][col])){ // <- if this tile is in the mineList return 1
+            // contained a mine
             return 1;
         }
         return 0; // didnt contain a mine
@@ -60,6 +72,7 @@ public class SetUp extends JButton {
             return;
         }
         tile.setEnabled(false);
+        //tile.setIcon(null);
         game.tileClicked += 1;
 
         int MinesFound = 0;
@@ -105,7 +118,7 @@ public class SetUp extends JButton {
             
             game.gameOver = true;
 
-            game.textLabel.setText("Mines Cleared!");
+            game.minesLabel.setText("Mines Cleared!");
         }
 
     }
