@@ -1,4 +1,5 @@
 package core;
+import java.awt.*;
 import java.net.URL;
 import java.util.Random; // <- place mines in random tiles
 import javax.swing.ImageIcon;
@@ -39,7 +40,9 @@ public class Engine{
 
         for (int i = 0; i < game.mineList.size(); i++){
             MineTile tile = game.mineList.get(i);
+           // tile.setBackground(new Color(34,162,23));
             tile.setIcon(bombIcon);
+            tile.setBackground(Color.GRAY);
         }
 
         game.gameOver = true;
@@ -69,6 +72,7 @@ public class Engine{
             return;
         }
         tile.setEnabled(false);
+        //tile.setIcon(null);
         game.tileClicked += 1;
 
         int MinesFound = 0;

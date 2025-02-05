@@ -1,6 +1,7 @@
 package core;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.ArrayList; // <- store all the tiles with the mines
 import javax.swing.*;
 
@@ -21,6 +22,7 @@ public class Minesweeper {
     JLabel minesLabel = new JLabel();
     JPanel texPanel = new JPanel();
     JPanel boardPanel = new JPanel();
+    ImageIcon grassTile = null;
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
@@ -55,6 +57,10 @@ public class Minesweeper {
         boardPanel.setLayout(new GridLayout(numRows, numColoums)); // 8x8
         frame.add(boardPanel);
         //boardPanel.setBackground(Color.LIGHT_GRAY);
+        URL grassTilePng = getClass().getResource("imgs/grassLandTile.png");
+        if (grassTilePng != null) {
+            grassTile = new ImageIcon(grassTilePng);
+        }
 
         for (int r = 0; r < numRows; r++){
             for (int c = 0; c < numColoums; c++){
@@ -65,6 +71,7 @@ public class Minesweeper {
                 tile.setMargin(new Insets(0, 0, 0, 0));
                 tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
                 tile.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                //tile.setIcon(grassTile);
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e){
@@ -81,15 +88,18 @@ public class Minesweeper {
                                     bombSetUp.reavelMines();;
                                 }
                                 else{
+                                    tile.setIcon(null);
                                     bombSetUp.checkMine(tile.roww, tile.coloumnn);
                                 }
                             }
                         }
                         else if (e.getButton() == MouseEvent.BUTTON3){ // right click
                             if (tile.getText() == "" && tile.isEnabled()){
+                                //tile.setIcon(null);
                                 tile.setText("🚩");
                             }
                             else if (tile.getText() == "🚩"){
+                               // tile.setIcon(grassTile);
                                 tile.setText("");
                             }
                         }
