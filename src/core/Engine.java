@@ -47,6 +47,7 @@ public class Engine{
 
         game.gameOver = true;
         game.minesLabel.setText("Game Over!");
+        game.mineList.clear();
     }
 
     public int countMine(int ro, int col){
@@ -119,6 +120,8 @@ public class Engine{
             game.gameOver = true;
 
             game.minesLabel.setText("Mines Cleared!");
+            
+            game.mineList.clear();
         }
 
     }

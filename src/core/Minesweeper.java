@@ -36,83 +36,96 @@ public class Minesweeper {
         this.mineCount = mineCount;
     }*/
 
-   public void startGame(){
-    //frame.setVisible(true);
-        frame.setSize(boardWidth, boardHight);
-        frame.setLocationRelativeTo(null); // <- this will make the gui open in the center of the screen
-        frame.setResizable(false);
-        frame.setLayout(new BorderLayout());
-        //frame.setUndecorated(true);
+   private void buildBoardPanel(){
+    frame.setSize(boardWidth, boardHight);
+    frame.setLocationRelativeTo(null); // <- this will make the gui open in the center of the screen
+    frame.setResizable(false);
+    frame.setLayout(new BorderLayout());
+    //frame.setUndecorated(true);
 
-        minesLabel.setFont(new Font("Arial", Font.BOLD, 25));
-        minesLabel.setHorizontalAlignment(JLabel.CENTER);
-        minesLabel.setText("Mines: " + Integer.toString(mineCount));
-        minesLabel.setOpaque(true);
+    minesLabel.setFont(new Font("Arial", Font.BOLD, 25));
+    minesLabel.setHorizontalAlignment(JLabel.CENTER);
+    minesLabel.setText("Mines: " + Integer.toString(mineCount));
+    minesLabel.setOpaque(true);
 
-        texPanel.setLayout(new BorderLayout());
-        texPanel.add(minesLabel);
+    texPanel.setLayout(new BorderLayout());
+    texPanel.add(minesLabel);
 
-        frame.add(texPanel, BorderLayout.NORTH);
+    frame.add(texPanel, BorderLayout.NORTH);
 
-        boardPanel.setLayout(new GridLayout(numRows, numColoums)); // 8x8
-        frame.add(boardPanel);
-        //boardPanel.setBackground(Color.LIGHT_GRAY);
-        URL grassTilePng = getClass().getResource("imgs/grassLandTile.png");
-        if (grassTilePng != null) {
-            grassTile = new ImageIcon(grassTilePng);
-        }
+    boardPanel.setLayout(new GridLayout(numRows, numColoums)); // 8x8
+    frame.add(boardPanel);
+    //boardPanel.setBackground(Color.LIGHT_GRAY);
+    URL grassTilePng = getClass().getResource("imgs/grassLandTile.png");
+    if (grassTilePng != null) {
+        grassTile = new ImageIcon(grassTilePng);
+    }
 
-        for (int r = 0; r < numRows; r++){
-            for (int c = 0; c < numColoums; c++){
-                MineTile tile = new MineTile(r, c);
-                board[r][c] = tile;
+    if(gameOver){
+        boardPanel.removeAll();
+        gameOver = false;
+    }
 
-                tile.setFocusable(false);
-                tile.setMargin(new Insets(0, 0, 0, 0));
-                tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
-                tile.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                //tile.setIcon(grassTile);
-                tile.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e){
-                        if (gameOver){
-                            return;
-                        }
+   }
 
-                        MineTile tile = (MineTile) e.getSource();
+   private void panelSetup(){
+    for (int r = 0; r < numRows; r++){
+        for (int c = 0; c < numColoums; c++){
+            MineTile tile = new MineTile(r, c);
+            board[r][c] = tile;
 
-                        // left click
-                        if (e.getButton() == MouseEvent.BUTTON1){
-                            if (tile.getText() == ""){ // will only triger if the tile is empty
-                                if (mineList.contains(tile)){
-                                    bombSetUp.reavelMines();;
-                                }
-                                else{
-                                    tile.setIcon(null);
-                                    bombSetUp.checkMine(tile.roww, tile.coloumnn);
-                                }
+            tile.setFocusable(false);
+            tile.setMargin(new Insets(0, 0, 0, 0));
+            tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
+            tile.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            //tile.setIcon(grassTile);
+            tile.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e){
+                    if (gameOver){
+                        return;
+                    }
+
+                    MineTile tile = (MineTile) e.getSource();
+
+                    // left click
+                    if (e.getButton() == MouseEvent.BUTTON1){
+                        if (tile.getText() == ""){ // will only triger if the tile is empty
+                            if (mineList.contains(tile)){
+                                bombSetUp.reavelMines();;
                             }
-                        }
-                        else if (e.getButton() == MouseEvent.BUTTON3){ // right click
-                            if (tile.getText() == "" && tile.isEnabled()){
-                                //tile.setIcon(null);
-                                tile.setText("🚩");
-                            }
-                            else if (tile.getText() == "🚩"){
-                               // tile.setIcon(grassTile);
-                                tile.setText("");
+                            else{
+                                tile.setIcon(null);
+                                bombSetUp.checkMine(tile.roww, tile.coloumnn);
                             }
                         }
                     }
-                });
-                boardPanel.add(tile);
-
-            }
+                    else if (e.getButton() == MouseEvent.BUTTON3){ // right click
+                        if (tile.getText() == "" && tile.isEnabled()){
+                            //tile.setIcon(null);
+                            tile.setText("🚩");
+                        }
+                        else if (tile.getText() == "🚩"){
+                           // tile.setIcon(grassTile);
+                            tile.setText("");
+                        }
+                    }
+                }
+            });
+            boardPanel.add(tile);
         }
+    }
+    
+    frame.setVisible(true); // makes the frame visible after everything is loaded
 
-        frame.setVisible(true); // makes the frame visible after everything is loaded
+    bombSetUp.setMines();
 
-        bombSetUp.setMines();
+   }
+
+   public void startGame(){       
+    
+    buildBoardPanel();
+    panelSetup();
         
    } 
 
