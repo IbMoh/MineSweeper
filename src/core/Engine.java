@@ -46,6 +46,7 @@ public class Engine{
         }
 
         game.gameOver = true;
+        game.timer.stop();
         game.minesLabel.setText("Game Over!");
         game.mineList.clear();
     }
@@ -120,6 +121,8 @@ public class Engine{
             game.gameOver = true;
 
             game.minesLabel.setText("Mines Cleared!");
+
+            game.timer.stop();
             
             game.mineList.clear();
         }
