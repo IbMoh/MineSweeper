@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ArrayList; // <- store all the tiles with the mines
 import javax.swing.*;
 
-public class Minesweeper {
+public class Minesweeper implements ActionListener {
 
     // changeable variables
     int tileSize = 70;
@@ -23,6 +23,7 @@ public class Minesweeper {
     JPanel texPanel = new JPanel();
     JPanel boardPanel = new JPanel();
     ImageIcon grassTile = null;
+    Timer timer = new Timer(1000, this);
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
@@ -64,6 +65,7 @@ public class Minesweeper {
     if(gameOver){
         boardPanel.removeAll();
         gameOver = false;
+        timer.stop();
     }
 
    }
@@ -126,7 +128,12 @@ public class Minesweeper {
     
     buildBoardPanel();
     panelSetup();
-        
+    timer.start();
+   }
+
+   @Override
+   public void actionPerformed(ActionEvent e) {
+    System.out.println("timer:");
    } 
 
 }
