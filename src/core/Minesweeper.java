@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ArrayList; // <- store all the tiles with the mines
 import javax.swing.*;
 
-public class Minesweeper {
+public class Minesweeper implements ActionListener {
 
     // changeable variables
     int tileSize = 70;
@@ -13,6 +13,7 @@ public class Minesweeper {
     int mineCount = 10;
     int tileClicked = 0; // goal is to click all the tiles excluding the bomb tiles
     boolean gameOver = false;
+    int time = 0;
 
     int numColoums = numRows;
     int boardWidth = numColoums * tileSize;
@@ -23,6 +24,10 @@ public class Minesweeper {
     JPanel texPanel = new JPanel();
     JPanel boardPanel = new JPanel();
     ImageIcon grassTile = null;
+    Timer timer = new Timer(1000, this);
+    JLabel timeLabel = new JLabel();
+    JPanel timePanel = new JPanel();
+    JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 5));
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
@@ -48,10 +53,19 @@ public class Minesweeper {
     minesLabel.setText("Mines: " + Integer.toString(mineCount));
     minesLabel.setOpaque(true);
 
-    texPanel.setLayout(new BorderLayout());
-    texPanel.add(minesLabel);
+    timeLabel.setFont(new Font("Arial", Font.BOLD, 25));
+    timeLabel.setHorizontalAlignment(JLabel.CENTER);
 
-    frame.add(texPanel, BorderLayout.NORTH);
+    infoPanel.removeAll();
+    infoPanel.add(minesLabel);
+    infoPanel.add(timeLabel);
+
+    frame.add(infoPanel, BorderLayout.NORTH);
+
+    //texPanel.setLayout(new BorderLayout());
+    //texPanel.add(minesLabel);
+
+    //frame.add(texPanel, BorderLayout.NORTH);
 
     boardPanel.setLayout(new GridLayout(numRows, numColoums)); // 8x8
     frame.add(boardPanel);
@@ -123,10 +137,19 @@ public class Minesweeper {
    }
 
    public void startGame(){       
-    
+    time = 0;
+    timeLabel.setText("Time: 00:00");
     buildBoardPanel();
     panelSetup();
-        
-   } 
+    timer.start();
+   }
+
+   @Override
+    public void actionPerformed(ActionEvent e) {
+        time++;
+        int minutes = time / 60;
+        int seconds = time % 60;
+        timeLabel.setText(String.format("Time: %02d:%02d", minutes, seconds));
+    } 
 
 }
