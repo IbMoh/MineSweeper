@@ -32,6 +32,7 @@ public class Minesweeper implements ActionListener {
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
     Engine bombSetUp = new Engine(this);
+    //URL grassTilePng = getClass().getResource("imgs/grassTile.png");
 
     // could also be that we make a constructor here and take that instance into mainmenu
 
@@ -61,25 +62,10 @@ public class Minesweeper implements ActionListener {
     infoPanel.add(timeLabel);
 
     frame.add(infoPanel, BorderLayout.NORTH);
-
-    //texPanel.setLayout(new BorderLayout());
-    //texPanel.add(minesLabel);
-
-    //frame.add(texPanel, BorderLayout.NORTH);
+    //grassTile = new ImageIcon(grassTilePng);
 
     boardPanel.setLayout(new GridLayout(numRows, numColoums)); // 8x8
     frame.add(boardPanel);
-    //boardPanel.setBackground(Color.LIGHT_GRAY);
-    URL grassTilePng = getClass().getResource("imgs/grassLandTile.png");
-    if (grassTilePng != null) {
-        grassTile = new ImageIcon(grassTilePng);
-    }
-
-    if(gameOver){
-        boardPanel.removeAll();
-        gameOver = false;
-    }
-
    }
 
    private void panelSetup(){
@@ -137,7 +123,11 @@ public class Minesweeper implements ActionListener {
    }
 
    public void startGame(){       
+    tileClicked = 0;
     time = 0;
+    boardPanel.removeAll();
+    gameOver = false;
+    mineList.clear();
     timeLabel.setText("Time: 00:00");
     buildBoardPanel();
     panelSetup();
