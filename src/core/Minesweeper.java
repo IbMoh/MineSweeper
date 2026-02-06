@@ -1,7 +1,7 @@
 package core;
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
+//import java.net.URL;
 import java.util.ArrayList; // <- store all the tiles with the mines
 import javax.swing.*;
 
@@ -26,8 +26,9 @@ public class Minesweeper implements ActionListener {
     ImageIcon grassTile = null;
     Timer timer = new Timer(1000, this);
     JLabel timeLabel = new JLabel();
-    JPanel timePanel = new JPanel();
-    JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 5));
+    JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
+    //JPanel infoPanel = new JPanel(new GridLayout(1, 1));
+    JButton restartButton = new JButton();
 
     MineTile[][] board = new MineTile[numRows][numColoums];
     ArrayList<MineTile> mineList = new ArrayList<>();
@@ -57,8 +58,11 @@ public class Minesweeper implements ActionListener {
     timeLabel.setFont(new Font("Arial", Font.BOLD, 25));
     timeLabel.setHorizontalAlignment(JLabel.CENTER);
 
+    this.resetButton(restartButton);
+
     infoPanel.removeAll();
     infoPanel.add(minesLabel);
+    infoPanel.add(restartButton);
     infoPanel.add(timeLabel);
 
     frame.add(infoPanel, BorderLayout.NORTH);
@@ -141,5 +145,19 @@ public class Minesweeper implements ActionListener {
         int seconds = time % 60;
         timeLabel.setText(String.format("Time: %02d:%02d", minutes, seconds));
     } 
+
+    private void resetButton(JButton button) {
+        button.setText("🔄️");
+        button.setPreferredSize(new Dimension(70,30));;
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e){
+                if(e.getButton() == 1) {
+                    startGame();
+                }
+            }
+        });
+        button.setVisible(false);
+    }
 
 }
