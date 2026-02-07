@@ -35,14 +35,6 @@ public class Minesweeper implements ActionListener {
     Engine bombSetUp = new Engine(this);
     //URL grassTilePng = getClass().getResource("imgs/grassTile.png");
 
-    // could also be that we make a constructor here and take that instance into mainmenu
-
-    /*public Minesweeper(int tileSize, int numRows, int mineCount){
-        this.tileSize = tileSize;
-        this.numRows = numRows;
-        this.mineCount = mineCount;
-    }*/
-
    private void buildBoardPanel(){
     frame.setSize(boardWidth, boardHight);
     frame.setLocationRelativeTo(null); // <- this will make the gui open in the center of the screen
@@ -82,40 +74,8 @@ public class Minesweeper implements ActionListener {
             tile.setMargin(new Insets(0, 0, 0, 0));
             tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
             tile.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            tileLogicSetup(tile);
             //tile.setIcon(grassTile);
-            tile.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e){
-                    if (gameOver){
-                        return;
-                    }
-
-                    MineTile tile = (MineTile) e.getSource();
-
-                    // left click
-                    if (e.getButton() == MouseEvent.BUTTON1){
-                        if (tile.getText() == ""){ // will only triger if the tile is empty
-                            if (mineList.contains(tile)){
-                                bombSetUp.reavelMines();;
-                            }
-                            else{
-                                tile.setIcon(null);
-                                bombSetUp.checkMine(tile.roww, tile.coloumnn);
-                            }
-                        }
-                    }
-                    else if (e.getButton() == MouseEvent.BUTTON3){ // right click
-                        if (tile.getText() == "" && tile.isEnabled()){
-                            //tile.setIcon(null);
-                            tile.setText("🚩");
-                        }
-                        else if (tile.getText() == "🚩"){
-                           // tile.setIcon(grassTile);
-                            tile.setText("");
-                        }
-                    }
-                }
-            });
             boardPanel.add(tile);
         }
     }
@@ -135,7 +95,7 @@ public class Minesweeper implements ActionListener {
     timeLabel.setText("Time: 00:00");
     buildBoardPanel();
     panelSetup();
-    timer.start();
+    timer.restart();
    }
 
    @Override
@@ -158,6 +118,43 @@ public class Minesweeper implements ActionListener {
             }
         });
         button.setVisible(false);
+    }
+
+    private void tileLogicSetup(MineTile tile) {
+
+        tile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e){
+                if (gameOver){
+                    return;
+                }
+
+                MineTile tile = (MineTile) e.getSource();
+
+                // left click
+                if (e.getButton() == MouseEvent.BUTTON1){
+                    if (tile.getText() == ""){ // will only triger if the tile is empty
+                        if (mineList.contains(tile)){
+                            bombSetUp.reavelMines();;
+                        }
+                        else{
+                            tile.setIcon(null);
+                            bombSetUp.checkMine(tile.roww, tile.coloumnn);
+                        }
+                    }
+                }
+                else if (e.getButton() == MouseEvent.BUTTON3){ // right click
+                    if (tile.getText() == "" && tile.isEnabled()){
+                        //tile.setIcon(null);
+                        tile.setText("🚩");
+                    }
+                    else if (tile.getText() == "🚩"){
+                        // tile.setIcon(grassTile);
+                        tile.setText("");
+                    }
+                }
+            }
+        });
     }
 
 }
