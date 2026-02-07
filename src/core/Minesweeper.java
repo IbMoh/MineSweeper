@@ -126,7 +126,7 @@ public class Minesweeper implements ActionListener {
 
    }
 
-   public void startGame(){       
+   public void startGame(){
     tileClicked = 0;
     time = 0;
     boardPanel.removeAll();
